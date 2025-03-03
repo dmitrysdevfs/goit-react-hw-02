@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.wrapper button {
+  padding: 8px;
+}
