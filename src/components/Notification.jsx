@@ -1,14 +1,7 @@
-export default function Notification({ totalFeedback, positiveFeedback }) {
+export default function Notification() {
   return (
     <>
-      {totalFeedback > 0 ? (
-        <div>
-          <p>Total: {totalFeedback}</p>
-          <p>Positive: {positiveFeedback}%</p>
-        </div>
-      ) : (
-        <p>No feedback yet</p>
-      )}
+      <p>No feedback yet</p>
     </>
   );
 }

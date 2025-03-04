@@ -1,13 +1,21 @@
 import css from './Feedback.module.css';
 
-export default function Feedback({ feedback: { good, neutral, bad } }) {
+export default function Feedback({
+  feedback: { good, neutral, bad },
+  totalFeedback,
+  positiveFeedback,
+}) {
   return (
     <div className={css.wrapper}>
       <p>Good: {good}</p>
       <p>Neutral: {neutral}</p>
       <p>Bad: {bad}</p>
-      {/* <p>Total: {good + neutral + bad}</p>
-      <p>Positive: {((good + neutral) / (good + neutral + bad)) * 100}%</p> */}
+      {totalFeedback > 0 && (
+        <>
+          <p>Total: {totalFeedback}</p>
+          <p>Positive: {positiveFeedback}%</p>
+        </>
+      )}
     </div>
   );
 }

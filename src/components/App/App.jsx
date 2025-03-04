@@ -6,9 +6,9 @@ import Notification from '../Notification';
 import css from './App.module.css';
 
 export default function App() {
-  const [feedback, setFeedback] = useState(() => {
-    const initialValue = { good: 0, neutral: 0, bad: 0 };
+  const initialValue = { good: 0, neutral: 0, bad: 0 };
 
+  const [feedback, setFeedback] = useState(() => {
     const savedFeedback = localStorage.getItem('saved-feedback');
 
     if (savedFeedback !== null) {
@@ -27,16 +27,14 @@ export default function App() {
   const positiveFeedback = Math.round((good / totalFeedback) * 100);
 
   const updateFeedback = feedbackType => {
-    feedbackType !== 'reset'
-      ? setFeedback({
-          ...feedback,
-          [feedbackType]: feedback[feedbackType] + 1,
-        })
-      : setFeedback({
-          good: 0,
-          neutral: 0,
-          bad: 0,
-        });
+    if (feedbackType !== 'reset') {
+      setFeedback({
+        ...feedback,
+        [feedbackType]: feedback[feedbackType] + 1,
+      });
+    } else {
+      setFeedback(initialValue);
+    }
   };
 
   return (
@@ -45,12 +43,15 @@ export default function App() {
         <Description />
         <Options onUpdate={updateFeedback} totalFeedback={totalFeedback} />
 
-        {totalFeedback > 0 && <Feedback feedback={feedback} />}
-
-        <Notification
-          totalFeedback={totalFeedback}
-          positiveFeedback={positiveFeedback}
-        />
+        {totalFeedback > 0 ? (
+          <Feedback
+            feedback={feedback}
+            totalFeedback={totalFeedback}
+            positiveFeedback={positiveFeedback}
+          />
+        ) : (
+          <Notification />
+        )}
       </div>
     </>
   );
