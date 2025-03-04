@@ -28,10 +28,10 @@ export default function App() {
 
   const updateFeedback = feedbackType => {
     if (feedbackType !== 'reset') {
-      setFeedback({
-        ...feedback,
-        [feedbackType]: feedback[feedbackType] + 1,
-      });
+      setFeedback(prevFeedback => ({
+        ...prevFeedback,
+        [feedbackType]: prevFeedback[feedbackType] + 1,
+      }));
     } else {
       setFeedback(initialValue);
     }
